@@ -9,7 +9,7 @@ function App() {
 
     const [projectsState , setProjectsState] = useState({
         selectedProjectId : undefined,
-        projects : [],
+        projects : []
     });
 
     function handleStartNewProject(){
@@ -30,7 +30,6 @@ function App() {
             };
 
             return {
-                ...prevState,
                 selectedProjectId: undefined,
                 projects: [...prevState.projects , newProject]
             };
