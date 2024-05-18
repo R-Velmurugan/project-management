@@ -9,7 +9,7 @@ export default function Sidebar({onSelectAddProject , projects , onSelectExistin
             <ul>
                 {projects.map((project) => (
                     <li key = {project.id}>
-                        <button onClick={() => {onSelectExistingProject(project.id)}} className="w-full text-left px-2 py-1 rounded-sm my-1 text-stone-400 hover:bg-stone-800">
+                        <button onClick={() => {onSelectExistingProject(project.title , project.description , project.dueDate)}} className="w-full text-left px-2 py-1 rounded-sm my-1 text-stone-400 hover:bg-stone-800">
                             {project.title}
                         </button>
                     </li>

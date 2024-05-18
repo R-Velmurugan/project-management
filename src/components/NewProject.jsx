@@ -2,8 +2,7 @@ import Input from "./Input";
 import {useRef} from "react";
 import Modal from "./Modal";
 
-export default function NewProject({onAdd , onCancel}){
-
+export default function NewProject({projectDetails , onAdd , onCancel}){
     const modal = useRef();
 
     const title = useRef();
@@ -45,9 +44,9 @@ export default function NewProject({onAdd , onCancel}){
                     </li>
                 </menu>
                 <div>
-                    <Input ref = {title}  label = "Title" />
-                    <Input ref = {description} label="Description" isTextarea/>
-                    <Input ref = {dueDate} type = "date" label="Due date" />
+                    <Input ref = {title}  label = "Title" value = {projectDetails?.title}/>
+                    <Input ref = {description} label="Description" isTextarea value={projectDetails?.description} />
+                    <Input ref = {dueDate} type = "date" label="Due date" value={projectDetails?.dueDate}/>
                 </div>
             </div>
         </>

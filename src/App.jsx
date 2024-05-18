@@ -8,7 +8,7 @@ let id = 0;
 function App() {
 
     const [projectsState , setProjectsState] = useState({
-        selectedProjectId : undefined,
+        selectedProjectDetails : undefined,
         projects : []
     });
 
@@ -16,7 +16,7 @@ function App() {
         setProjectsState((prevState) => {
             return {
                 ...prevState,
-                selectedProjectId: null
+                selectedProjectDetails: null
             };
         });
     }
@@ -30,7 +30,7 @@ function App() {
             };
 
             return {
-                selectedProjectId: undefined,
+                selectedProjectDetails: undefined,
                 projects: [...prevState.projects , newProject]
             };
         })
@@ -40,19 +40,28 @@ function App() {
         setProjectsState(prevState => {
             return {
                 ...prevState,
-                selectedProjectId: undefined
+                selectedProjectDetails: undefined
             }
         })
     }
 
+    function handleSelectExistingProject(title , description , dueDate){
+        setProjectsState(prevState => {
+            return {
+                ...prevState,
+                selectedProjectDetails: {title : title , description : description , dueDate : dueDate}
+            }
+        });
+    }
+
     let content;
 
-    if(projectsState.selectedProjectId === undefined) content = <NoProjectsSelected onSelectAddProject = {handleStartNewProject} />
-    else content = <NewProject onAdd = {handleAddProject} onCancel = {handleCancelAddProject} />
+    if(projectsState.selectedProjectDetails === undefined) content = <NoProjectsSelected onSelectAddProject = {handleStartNewProject} />
+    else content = <NewProject onAdd = {handleAddProject} onCancel = {handleCancelAddProject} projectDetails = {projectsState.selectedProjectDetails}/>
 
     return (
     <main className="h-screen my-8 flex gap-8">
-        <Sidebar onSelectAddProject = {handleStartNewProject} projects={projectsState.projects} />
+        <Sidebar onSelectAddProject = {handleStartNewProject} projects={projectsState.projects} onSelectExistingProject = {handleSelectExistingProject} />
         {content}
     </main>
     );
